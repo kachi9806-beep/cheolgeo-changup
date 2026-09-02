@@ -23,6 +23,7 @@ img { max-width: 100%; display: block; }
 /* 스탠드형 컬럼: 화면 중앙 고정, 바깥은 검정 */
 .page {
   width: 100%;
+  word-break: keep-all;
   max-width: var(--col);
   margin: 0 auto;
   background: var(--black);
@@ -101,14 +102,14 @@ mark { background: var(--yellow); color: var(--ink); font-weight: 700; padding: 
 .hl.dk { color: var(--ink); }
 .ccards { list-style: none; margin: 44px 0 0; display: flex; flex-direction: column; gap: 16px; }
 .ccard {
-  display: flex; align-items: center; gap: 22px; text-align: left;
-  background: #fff; border-radius: 20px; padding: 30px 32px;
+  display: flex; align-items: center; gap: 18px; text-align: left;
+  background: #fff; border-radius: 20px; padding: 30px 26px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
 }
 .num { flex: none; font-weight: 900; font-size: 42px; color: var(--yellow); -webkit-text-stroke: 1.4px var(--ink); }
 .ccard__body { flex: 1; }
 .ccard__body h3 { font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: var(--ink); }
-.ccard__body p { font-weight: 500; font-size: 18px; letter-spacing: -0.02em; color: var(--ink-sub); margin-top: 6px; }
+.ccard__body p { font-weight: 500; font-size: 16px; letter-spacing: -0.02em; color: var(--ink-sub); margin-top: 6px; }
 .ccard__icon { flex: none; width: 56px; height: 56px; object-fit: contain; }
 .curriculum .sub { margin-top: 56px; }
 .curriculum .closing { margin-top: 14px; }
@@ -228,43 +229,49 @@ mark { background: var(--yellow); color: var(--ink); font-weight: 700; padding: 
   .js .reveal { opacity: 1 !important; transform: none !important; }
 }
 
-/* 소형 단말(360px 이하): 480px 기준 줄바꿈 유지를 위한 축소 */
-@media (max-width: 360px) {
-  section { padding-left: 20px; padding-right: 20px; }
-  .foot { padding-left: 20px; padding-right: 20px; }
-  .kicker, .hero__eyebrow { font-size: 16px; }
-  .hero__title { font-size: 46px; }
-  .hero__sub, .hero__hl, .sub, .hl { font-size: 15px; }
-  .h2 { font-size: 32px; }
-  .final .h2 { font-size: 35px; }
-  .quote { font-size: 33px; }
-  .closing { font-size: 21px; }
-  .cta { font-size: 19px; }
-  .qcard { padding: 22px 18px; gap: 12px; }
-  .chip { font-size: 15px; padding: 6px 10px; }
-  .q { font-size: 18px; }
-  .ccard { padding: 24px 16px; gap: 12px; }
-  .num { font-size: 32px; }
-  .ccard__body h3 { font-size: 19px; }
-  .ccard__body p { font-size: 14px; }
-  .ccard__icon { width: 42px; height: 42px; }
-  .step { padding: 22px 18px; gap: 14px; }
-  .badge { width: 42px; height: 42px; font-size: 19px; }
-  .step h3 { font-size: 20px; }
-  .step p { font-size: 15px; }
-  .emph { font-size: 25px; }
-  .flow__chip { font-size: 16px; padding: 10px 16px; }
-  .final__hl { font-size: 19px; }
-  .final__tel { font-size: 27px; }
-  .foot p { font-size: 12px; }
-}
+/* 480px 미만: 컬럼 폭에 비례 축소해 480px 기준 줄바꿈을 그대로 유지
+   (vw 값 = 기준 px / 480 * 100) */
+@media (max-width: 479px) {
+  section { padding-left: 7.083vw; padding-right: 7.083vw; }
+  .foot { padding-left: 7.083vw; padding-right: 7.083vw; }
 
-/* 초소형 단말(344px 이하) 추가 축소 */
-@media (max-width: 344px) {
-  section { padding-left: 16px; padding-right: 16px; }
-  .foot { padding-left: 16px; padding-right: 16px; }
-  .hero__title { font-size: 41px; }
-  .ccard__body p { font-size: 13px; }
-  .step p { font-size: 14px; }
-  .foot p { font-size: 11px; }
+  .logo__name { font-size: 5.417vw; }
+  .logo__bar { width: 2.5vw; height: 5.417vw; }
+  .kicker, .hero__eyebrow { font-size: 3.958vw; }
+  .h2 { font-size: 7.917vw; }
+  .sub, .hl, .hero__sub, .hero__hl { font-size: 3.75vw; }
+  .closing { font-size: 5.208vw; }
+  .cta { font-size: 4.583vw; padding: 4.375vw 0; }
+  .cta__note { font-size: 3.125vw; }
+  mark { padding: 0.417vw 1.25vw; }
+
+  .hero__title { font-size: 11.667vw; }
+
+  .qcard { padding: 5.417vw 5.833vw; gap: 3.75vw; }
+  .chip { font-size: 3.542vw; padding: 1.458vw 2.917vw; }
+  .q { font-size: 4.583vw; }
+  .quote { font-size: 8.333vw; }
+
+  .ccard { padding: 6.25vw 5.417vw; gap: 3.75vw; }
+  .num { font-size: 8.75vw; }
+  .ccard__body h3 { font-size: 5vw; }
+  .ccard__body p { font-size: 3.333vw; }
+  .ccard__icon { width: 11.667vw; height: 11.667vw; }
+
+  .step { padding: 5.833vw 6.667vw; gap: 5vw; }
+  .badge { width: 10.417vw; height: 10.417vw; font-size: 4.583vw; }
+  .step h3 { font-size: 5vw; }
+  .step p { font-size: 3.75vw; }
+  .emph { font-size: 6.25vw; }
+  .flow__chip { font-size: 3.958vw; padding: 2.5vw 4.583vw; }
+
+  .final .h2 { font-size: 8.75vw; }
+  .final__hl { font-size: 4.583vw; }
+  .final__tel { font-size: 6.667vw; }
+
+  .foot p { font-size: 2.917vw; }
+  .foot__c { font-size: 2.708vw; }
+
+  .fab { padding-left: 4.583vw; padding-right: 4.583vw; }
+  .fab__btn { font-size: 4.167vw; padding: 3.958vw 0; }
 }
