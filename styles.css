@@ -227,3 +227,44 @@ mark { background: var(--yellow); color: var(--ink); font-weight: 700; padding: 
   * { animation: none !important; transition: none !important; scroll-behavior: auto; }
   .js .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* 소형 단말(360px 이하): 480px 기준 줄바꿈 유지를 위한 축소 */
+@media (max-width: 360px) {
+  section { padding-left: 20px; padding-right: 20px; }
+  .foot { padding-left: 20px; padding-right: 20px; }
+  .kicker, .hero__eyebrow { font-size: 16px; }
+  .hero__title { font-size: 46px; }
+  .hero__sub, .hero__hl, .sub, .hl { font-size: 15px; }
+  .h2 { font-size: 32px; }
+  .final .h2 { font-size: 35px; }
+  .quote { font-size: 33px; }
+  .closing { font-size: 21px; }
+  .cta { font-size: 19px; }
+  .qcard { padding: 22px 18px; gap: 12px; }
+  .chip { font-size: 15px; padding: 6px 10px; }
+  .q { font-size: 18px; }
+  .ccard { padding: 24px 16px; gap: 12px; }
+  .num { font-size: 32px; }
+  .ccard__body h3 { font-size: 19px; }
+  .ccard__body p { font-size: 14px; }
+  .ccard__icon { width: 42px; height: 42px; }
+  .step { padding: 22px 18px; gap: 14px; }
+  .badge { width: 42px; height: 42px; font-size: 19px; }
+  .step h3 { font-size: 20px; }
+  .step p { font-size: 15px; }
+  .emph { font-size: 25px; }
+  .flow__chip { font-size: 16px; padding: 10px 16px; }
+  .final__hl { font-size: 19px; }
+  .final__tel { font-size: 27px; }
+  .foot p { font-size: 12px; }
+}
+
+/* 초소형 단말(344px 이하) 추가 축소 */
+@media (max-width: 344px) {
+  section { padding-left: 16px; padding-right: 16px; }
+  .foot { padding-left: 16px; padding-right: 16px; }
+  .hero__title { font-size: 41px; }
+  .ccard__body p { font-size: 13px; }
+  .step p { font-size: 14px; }
+  .foot p { font-size: 11px; }
+}
