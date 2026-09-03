@@ -95,7 +95,7 @@
     for (i = 0; i < singles.length; i++) singles[i].classList.add("reveal");
 
     // 리스트: 자식마다 단계 지연
-    var groups = page.querySelectorAll(".qcards, .ccards, .steps, .flow");
+    var groups = page.querySelectorAll(".qcards, .ccards, .courses__cards, .steps, .flow");
     for (i = 0; i < groups.length; i++) {
       var kids = groups[i].children, j;
       for (j = 0; j < kids.length; j++) {

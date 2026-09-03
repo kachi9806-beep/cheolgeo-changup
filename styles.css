@@ -114,6 +114,21 @@ mark { background: var(--yellow); color: var(--ink); font-weight: 700; padding: 
 .curriculum .sub { margin-top: 56px; }
 .curriculum .closing { margin-top: 14px; }
 
+/* ---------- 03-1 교육과정 선택 ---------- */
+.courses { background: var(--deep); padding-top: 0; }
+.chevron--lt { border-top-color: var(--light); }
+.courses .kicker { margin-top: 70px; }
+.courses .h2 { margin-top: 12px; }
+.courses__cards { list-style: none; margin: 44px 0 0; display: flex; gap: 14px; }
+.ccourse {
+  flex: 1; text-align: center;
+  background: #fff; border-radius: 20px; padding: 26px 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+}
+.ccourse__icon { width: 80px; height: 80px; margin: 0 auto; object-fit: contain; }
+.ccourse__title { font-weight: 700; font-size: 21px; letter-spacing: -0.02em; color: var(--ink); margin-top: 12px; }
+.ccourse__desc { font-weight: 500; font-size: 15px; letter-spacing: -0.02em; color: var(--ink-sub); margin-top: 6px; }
+
 /* ---------- 04 실전 강조 ---------- */
 .field { background: var(--black); }
 .tools { width: 100%; margin: 44px 0; }
@@ -273,6 +288,12 @@ mark { background: var(--yellow); color: var(--ink); font-weight: 700; padding: 
   .step p { font-size: 3.75vw; }
   .emph { font-size: 6.25vw; }
   .flow__chip { font-size: 3.958vw; padding: 2.5vw 4.583vw; }
+
+  .courses__cards { gap: 2.917vw; }
+  .ccourse { padding: 5.417vw 3.75vw; }
+  .ccourse__icon { width: 16.667vw; height: 16.667vw; }
+  .ccourse__title { font-size: 4.375vw; }
+  .ccourse__desc { font-size: 3.125vw; }
 
   .final .h2 { font-size: 8.75vw; }
   .final__hl { font-size: 4.583vw; }
