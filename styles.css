@@ -208,11 +208,13 @@ mark { background: var(--yellow); color: var(--ink); font-weight: 700; padding: 
 .modal__done-desc { font-weight: 500; font-size: 15px; line-height: 1.55; color: var(--ink-sub); margin: 10px 0 20px; }
 .modal__fine { font-weight: 400; font-size: 13px; line-height: 1.5; color: #9a9a9a; margin-top: 16px; }
 .modal__kakao {
-  display: block; width: 100%; box-sizing: border-box; text-align: center; text-decoration: none;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; box-sizing: border-box; text-decoration: none;
   background: #fff; color: #191600; border: 1.6px solid #fee500; cursor: pointer;
   font-weight: 800; font-size: 17px; letter-spacing: -0.02em; padding: 15px 0; border-radius: 13px;
   margin-top: 14px; transition: transform .12s ease, background .12s ease;
 }
+.modal__kakao-ico { width: 20px; height: 20px; flex: none; }
 .modal__kakao:hover { transform: translateY(-1px); background: #fffbe0; }
 
 @keyframes fade { from { opacity: 0; } }
