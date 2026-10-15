@@ -45,14 +45,22 @@ section { padding-left: 3rem; padding-right: 3rem; }
 .nav {
   background: #0c0d0f;
   border-bottom: 1px solid #303033;
-  padding: 1.2rem 1.6rem;
-  display: flex; flex-direction: column; gap: 1rem;
+  height: 7rem; padding: 0 1.6rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 1rem;
 }
 .nav__menu { display: flex; justify-content: space-between; }
 .nav__menu a { font-size: 1.2rem; font-weight: 500; color: #dedede; text-decoration: none; white-space: nowrap; }
 
 /* ---------- 01 히어로 ---------- */
-.hero { background: #0c0d0f; padding-top: 3.6rem; padding-bottom: 4.5rem; }
+.hero {
+  background: #0c0d0f; padding-top: 3.6rem; padding-bottom: 4.5rem;
+  /* 첫 화면: 상단 메뉴를 뺀 화면 높이를 꽉 채우고, 남는 높이는 사진이 맡는다 */
+  display: flex; flex-direction: column;
+  min-height: calc(100vh - 7rem);
+  min-height: calc(100svh - 7rem);
+}
+.hero > * { flex: none; }
+.hero .logo { align-self: flex-start; }
 .eyebrow { margin-top: 2.8rem; font-size: 1.4rem; font-weight: 700; color: var(--yellow); }
 .hero h1 { margin-top: 0.9rem; font-size: 3.9rem; font-weight: 900; line-height: 1.18; color: var(--yellow); letter-spacing: -0.01em; }
 .hero .lead { margin-top: 1.5rem; font-size: 1.45rem; font-weight: 500; line-height: 1.55; color: #e8e8e8; }
@@ -62,7 +70,9 @@ section { padding-left: 3rem; padding-right: 3rem; }
   padding: 0.8rem 1.3rem 0.9rem;
   font-size: 1.25rem; font-weight: 600; white-space: nowrap;
 }
-.slider--hero { margin-top: 2.8rem; }
+.slider--hero { margin-top: 2.8rem; flex: 1 1 0; min-height: 16rem; display: flex; }
+.slider--hero .slider__track { flex: 1; }
+.slider--hero .slider__slide { height: 100%; aspect-ratio: auto; object-position: 50% 15%; }
 
 .cta {
   margin-top: 2.8rem;
