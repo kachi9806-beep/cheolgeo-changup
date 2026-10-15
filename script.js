@@ -68,7 +68,9 @@
   Array.prototype.forEach.call(document.querySelectorAll("[data-close-modal]"),
     function (el) { el.addEventListener("click", closeModal); });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !modal.hidden) closeModal();
+    if (e.key !== "Escape") return;
+    if (!telPop.hidden) closeTelPop();
+    else if (!modal.hidden) closeModal();
   });
 
   phoneInput.addEventListener("input", function () {
@@ -80,7 +82,49 @@
 
   // 전화 상담 바로하기: 담당자 전화로 즉시 연결
   callBtn.addEventListener("click", function () {
-    window.location.href = "tel:" + OWNER_TEL;
+    if (isDesktop()) openTelPop();
+    else window.location.href = "tel:" + OWNER_TEL;
+  });
+
+  // PC(마우스 환경)에서는 전화 연결 대신 번호 안내 팝업
+  var telPop = document.getElementById("telPop");
+  var telCopy = document.getElementById("telCopy");
+  var telLastFocused = null;
+
+  function isDesktop() {
+    return window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  }
+  function openTelPop() {
+    telLastFocused = document.activeElement;
+    telPop.hidden = false;
+    document.body.style.overflow = "hidden";
+    telCopy.textContent = "번호 복사하기";
+    setTimeout(function () { telCopy.focus(); }, 60);
+  }
+  function closeTelPop() {
+    telPop.hidden = true;
+    if (modal.hidden) document.body.style.overflow = "";
+    if (telLastFocused && telLastFocused.focus) telLastFocused.focus();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('a[href^="tel:"]'), function (a) {
+    a.addEventListener("click", function (e) {
+      if (!isDesktop()) return;
+      e.preventDefault();
+      openTelPop();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-close-tel]"),
+    function (el) { el.addEventListener("click", closeTelPop); });
+
+  telCopy.addEventListener("click", function () {
+    var num = "010-2076-5160";
+    function done() { telCopy.textContent = "복사되었습니다"; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(num).then(done, function () { telCopy.textContent = num; });
+    } else {
+      telCopy.textContent = num;
+    }
   });
 
   // ---------- 스크롤 리빌 애니메이션 ----------
