@@ -1,6 +1,6 @@
 /* 철거창업소 — 모바일 원페이지 (430px 컬럼, 좁은 화면은 같은 비율로 축소) */
 :root {
-  --col: 430px;
+  --col: 480px;
   --yellow: #ffce00;
   --orange: #c2410c;
   --navy: #101e2c;
@@ -10,8 +10,8 @@
     "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
-/* 1rem = 컬럼 430px 기준 10px. 430px 보다 좁으면 같은 비율로 줄어든다 */
-html { font-size: min(10px, calc(100vw / 43)); scroll-behavior: smooth; }
+/* 1rem = 화면 폭 430px 기준 10px. 폰 폭에 맞춰 늘고 줄며, 480px 넘는 화면은 480px 컬럼으로 고정 */
+html { font-size: calc(min(100vw, var(--col)) / 43); scroll-behavior: smooth; }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: #050505; color: #fff; -webkit-font-smoothing: antialiased; font-size: 16px; }
@@ -374,7 +374,7 @@ section { padding-left: 3rem; padding-right: 3rem; }
 }
 
 /* 데스크톱: 컬럼 중앙 고정, 컬럼 밖은 짙은 배경 */
-@media (min-width: 470px) {
+@media (min-width: 520px) {
   body { background: radial-gradient(circle at 50% 0%, #141414, #050505 60%); }
   .page { box-shadow: 0 0 80px rgba(0, 0, 0, .6); }
 }
