@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  var OWNER_TEL = "01036509807"; // 대표님 전화 (010-3650-9807)
+  var OWNER_TEL = "01020765160"; // 대표님 전화 (010-2076-5160)
   var LEAD_EMAIL = "kachi9806@gmail.com"; // 상담 신청 수신 메일
   var FORM_ENDPOINT = "https://formsubmit.co/ajax/" + LEAD_EMAIL;
 
@@ -11,6 +11,7 @@
   var done = document.getElementById("leadDone");
   var nameInput = document.getElementById("name");
   var phoneInput = document.getElementById("phone");
+  var agreeInput = document.getElementById("agree");
   var errBox = document.getElementById("formErr");
   var applyBtn = document.getElementById("applyBtn");
   var callBtn = document.getElementById("callBtn");
@@ -34,6 +35,7 @@
     form.hidden = false;
     done.hidden = true;
     hideError();
+    agreeInput.checked = false;
     applyBtn.disabled = false;
     applyBtn.textContent = "상담 신청하기";
   }
@@ -74,6 +76,7 @@
     hideError();
   });
   nameInput.addEventListener("input", hideError);
+  agreeInput.addEventListener("change", hideError);
 
   // 전화 상담 바로하기: 담당자 전화로 즉시 연결
   callBtn.addEventListener("click", function () {
@@ -87,15 +90,14 @@
 
     // 리빌 대상: 섹션 텍스트/이미지/버튼 (단독) + 리스트(자식 스태거)
     var singles = page.querySelectorAll(
-      ".logo, .hero__eyebrow, .hero__title, .hero__sub, .hero__hl, .hero__art, .cta, .cta__note," +
-      " .kicker, .h2, .sub, .hl, .bubble, .quote, .closing, .chevron," +
-      " .tools, .emph, .final__hl, .phone, .final__tel, .foot p"
+      ".hero .logo, .final .logo, .eyebrow, h1, h2, .lead, .chips, .slider, .cta, .label, .secnum," +
+      " .brand, .kicker, .practice__end, .survey__end, .flow, .info, .gallery figcaption, .price, .final__tel"
     );
     var i;
     for (i = 0; i < singles.length; i++) singles[i].classList.add("reveal");
 
     // 리스트: 자식마다 단계 지연
-    var groups = page.querySelectorAll(".qcards, .ccards, .courses__cards, .steps, .flow");
+    var groups = page.querySelectorAll(".pcards, .core, .day ol, .steps, .scards, .docs");
     for (i = 0; i < groups.length; i++) {
       var kids = groups[i].children, j;
       for (j = 0; j < kids.length; j++) {
@@ -120,6 +122,41 @@
     for (i = 0; i < targets.length; i++) io.observe(targets[i]);
   })();
 
+  // ---------- 사진 슬라이드: 스와이프 + 점 이동 ----------
+  Array.prototype.forEach.call(document.querySelectorAll(".slider"), function (slider) {
+    var track = slider.querySelector(".slider__track");
+    var dotsBox = slider.querySelector(".slider__dots");
+    var count = track.children.length;
+    if (count < 2) { dotsBox.hidden = true; return; }
+
+    var dots = [];
+    for (var k = 0; k < count; k++) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "slider__dot";
+      dot.setAttribute("aria-label", (k + 1) + "번째 사진 보기");
+      dot.addEventListener("click", goTo.bind(null, k));
+      dotsBox.appendChild(dot);
+      dots.push(dot);
+    }
+
+    function goTo(idx) {
+      track.scrollTo({ left: idx * track.clientWidth, behavior: "smooth" });
+    }
+    function sync() {
+      var idx = Math.round(track.scrollLeft / track.clientWidth);
+      for (var m = 0; m < dots.length; m++) dots[m].setAttribute("aria-current", m === idx ? "true" : "false");
+    }
+
+    var ticking = false;
+    track.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; sync(); });
+    }, { passive: true });
+    sync();
+  });
+
   // ---------- 플로팅 CTA ----------
   (function floatingCTA() {
     var fab = document.getElementById("fab");
@@ -132,14 +169,20 @@
       window.addEventListener("scroll", function () {
         var y = window.pageYOffset, vh = window.innerHeight;
         var bottom = document.body.scrollHeight - (y + vh);
-        fab.classList.toggle("show", y > vh * 0.8 && bottom > 220);
+        var show = y > vh * 0.8 && bottom > 220;
+        fab.classList.toggle("show", show);
+        fab.inert = !show;
       }, { passive: true });
       return;
     }
 
     var pastTop = false;   // 히어로를 지나쳤는가 (맨 위 벗어남)
     var nearBottom = false; // 마무리 섹션에 닿았는가 (맨 아래)
-    function update() { fab.classList.toggle("show", pastTop && !nearBottom); }
+    function update() {
+      var show = pastTop && !nearBottom;
+      fab.classList.toggle("show", show);
+      fab.inert = !show;
+    }
 
     new IntersectionObserver(function (e) {
       pastTop = !e[0].isIntersecting;
@@ -160,6 +203,7 @@
 
     if (!name) { showError("성함을 입력해주세요."); nameInput.focus(); return; }
     if (!isValidPhone(phone)) { showError("올바른 휴대폰 번호를 입력해주세요."); phoneInput.focus(); return; }
+    if (!agreeInput.checked) { showError("개인정보 수집·이용에 동의해주세요."); agreeInput.focus(); return; }
 
     hideError();
     applyBtn.disabled = true;
@@ -172,6 +216,7 @@
       body: JSON.stringify({
         이름: name,
         연락처: phone,
+        개인정보동의: "동의",
         _subject: "[철거창업소] 상담 신청 - " + name,
         _template: "table"
       })
