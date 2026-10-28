@@ -166,30 +166,22 @@
     for (i = 0; i < targets.length; i++) io.observe(targets[i]);
   })();
 
-  // ---------- 사진 슬라이드: 스와이프 + 점 이동 ----------
+  // ---------- 사진 슬라이드: 스와이프 + 장수 표시(누르면 다음 사진) ----------
   Array.prototype.forEach.call(document.querySelectorAll(".slider"), function (slider) {
     var track = slider.querySelector(".slider__track");
-    var dotsBox = slider.querySelector(".slider__dots");
+    var counter = slider.querySelector(".slider__count");
     var count = track.children.length;
-    if (count < 2) { dotsBox.hidden = true; return; }
+    if (count < 2) { counter.hidden = true; return; }
 
-    var dots = [];
-    for (var k = 0; k < count; k++) {
-      var dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "slider__dot";
-      dot.setAttribute("aria-label", (k + 1) + "번째 사진 보기");
-      dot.addEventListener("click", goTo.bind(null, k));
-      dotsBox.appendChild(dot);
-      dots.push(dot);
-    }
+    var current = 0;
+    counter.setAttribute("aria-label", "다음 사진 보기");
+    counter.addEventListener("click", function () {
+      track.scrollTo({ left: ((current + 1) % count) * track.clientWidth, behavior: "smooth" });
+    });
 
-    function goTo(idx) {
-      track.scrollTo({ left: idx * track.clientWidth, behavior: "smooth" });
-    }
     function sync() {
-      var idx = Math.round(track.scrollLeft / track.clientWidth);
-      for (var m = 0; m < dots.length; m++) dots[m].setAttribute("aria-current", m === idx ? "true" : "false");
+      current = Math.round(track.scrollLeft / track.clientWidth);
+      counter.textContent = (current + 1) + " / " + count;
     }
 
     var ticking = false;

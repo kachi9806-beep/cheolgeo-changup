@@ -64,7 +64,7 @@ section { padding-left: 3rem; padding-right: 3rem; }
 .eyebrow { margin-top: 2.8rem; font-size: 1.4rem; font-weight: 700; color: var(--yellow); }
 .hero h1 { margin-top: 0.9rem; font-size: 3.9rem; font-weight: 900; line-height: 1.18; color: var(--yellow); letter-spacing: -0.01em; }
 .hero .lead { margin-top: 1.5rem; font-size: 1.45rem; font-weight: 500; line-height: 1.55; color: #e8e8e8; }
-.chips { margin-top: 2rem; display: flex; gap: 0.7rem; }
+.chips { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.7rem; }
 .chips li {
   background: #232428; border-radius: 0.7rem;
   padding: 0.8rem 1.3rem 0.9rem;
@@ -99,18 +99,13 @@ section { padding-left: 3rem; padding-right: 3rem; }
   aspect-ratio: var(--ratio); object-fit: cover;
   scroll-snap-align: center; scroll-snap-stop: always;
 }
-.slider__dots {
-  position: absolute; left: 50%; bottom: 1rem; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 0.3rem;
-  padding: 0.4rem 0.6rem; border-radius: 99px; background: rgba(0, 0, 0, .35);
+.slider__count {
+  position: absolute; right: 1rem; bottom: 1rem;
+  padding: 0.3rem 0.7rem; border: 0; border-radius: 99px;
+  background: rgba(0, 0, 0, .45); color: #fff; cursor: pointer;
+  font-size: 1rem; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums;
 }
-.slider__dots[hidden] { display: none; }
-.slider__dot {
-  width: 0.4rem; height: 0.4rem; padding: 0; border: 0; border-radius: 99px;
-  background: rgba(255, 255, 255, .5); cursor: pointer;
-  transition: width .2s ease, background .2s ease;
-}
-.slider__dot[aria-current="true"] { width: 1.1rem; background: #fff; }
+.slider__count[hidden] { display: none; }
 .slider--hero { --ratio: 740 / 690; }
 .slider--about { --ratio: 740 / 520; border-radius: 1.2rem; }
 .slider--survey { --ratio: 740 / 480; border-radius: 1.2rem; }
@@ -143,6 +138,7 @@ section { padding-left: 3rem; padding-right: 3rem; }
 .about h2 { margin-top: 1.4rem; font-size: 2.7rem; font-weight: 800; line-height: 1.28; letter-spacing: -0.01em; }
 .about .lead { margin-top: 1.6rem; font-size: 1.4rem; line-height: 1.6; color: #d9dbdf; }
 .slider--about { margin-top: 2.4rem; }
+.about .about__for { margin-top: 2.4rem; }
 .about__line { margin-top: 2.8rem; border: 0; border-top: 1px solid #3a3e46; }
 .core { margin-top: 2.4rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .core li { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
@@ -159,9 +155,9 @@ section { padding-left: 3rem; padding-right: 3rem; }
 .flow {
   margin-top: 2.2rem; background: #fff; border-radius: 1.1rem;
   padding: 1.8rem 1.2rem;
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: center; align-items: center; gap: 2rem;
 }
-.flow li { width: 10rem; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; text-align: center; }
+.flow li { width: 13rem; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; text-align: center; }
 .flow__ico { width: 4.2rem; height: 4.2rem; border-radius: 50%; background: #ffe98a; display: grid; place-items: center; }
 .flow__ico img { width: 2rem; height: 2rem; }
 .flow strong { font-size: 1.25rem; font-weight: 700; white-space: nowrap; }
@@ -177,7 +173,7 @@ section { padding-left: 3rem; padding-right: 3rem; }
 .day header { background: var(--navy); color: #fff; display: flex; align-items: center; gap: 1.1rem; padding: 1.3rem 1.5rem; }
 .day strong { font-size: 2rem; font-weight: 900; }
 .day__bar { width: 1px; height: 1.8rem; background: #4a5566; }
-.day header p { font-size: 1.25rem; font-weight: 700; }
+.day header p { font-size: 1.8rem; font-weight: 700; }
 .day ol { padding: 1rem 1rem 0; display: flex; flex-direction: column; gap: 0.6rem; }
 .day li {
   display: flex; align-items: center; gap: 1rem;
@@ -200,7 +196,7 @@ section { padding-left: 3rem; padding-right: 3rem; }
 .info__ico { width: 3.6rem; height: 3.6rem; border-radius: 50%; background: #ffe98a; display: grid; place-items: center; }
 .info__ico img { width: 1.7rem; height: 1.7rem; }
 .info li > span:nth-child(2) { font-size: 1.05rem; color: #6a7280; }
-.info strong { font-size: 1.4rem; font-weight: 800; white-space: nowrap; }
+.info strong { font-size: 1.2rem; font-weight: 800; white-space: nowrap; }
 
 /* ---------- 05 실측부터 견적까지 ---------- */
 .survey { background: #0c0d0f; padding-top: 4.5rem; padding-bottom: 5rem; }
@@ -220,6 +216,7 @@ section { padding-left: 3rem; padding-right: 3rem; }
 .steps h3 { font-size: 1.6rem; font-weight: 700; }
 .steps p { margin-top: 0.4rem; font-size: 1.2rem; color: #d0d0d0; }
 .steps img { flex: none; width: 2.8rem; height: 2.8rem; }
+.survey__note { margin-top: 2rem; font-size: 1.3rem; line-height: 1.8; color: #ddd; }
 .survey__end { margin-top: 3rem; text-align: center; font-size: 2rem; font-weight: 900; }
 
 /* ---------- 06 창업지원 / 07 창업 준비자료 공통 번호 ---------- */
@@ -273,6 +270,7 @@ section { padding-left: 3rem; padding-right: 3rem; }
 /* ---------- 08 창업 상담 신청 ---------- */
 .final { background: #0a0a0a; padding-top: 6rem; padding-bottom: 6.5rem; text-align: center; }
 .final h2 { margin-top: 2.8rem; font-size: 3.5rem; font-weight: 900; line-height: 1.2; letter-spacing: -0.01em; }
+.final__place { margin-top: 2rem; font-size: 1.5rem; line-height: 1.8; color: #e0e0e0; }
 .price { margin-top: 2.4rem; font-size: 2.2rem; font-weight: 800; }
 .cta--call { padding: 1.5rem 0 1.6rem; border-radius: 1rem; }
 .final__tel { display: inline-block; margin-top: 1.3rem; font-size: 3rem; font-weight: 900; color: #fff; text-decoration: none; }

@@ -33,7 +33,7 @@ assets/photos  현장·교육 사진 (가로 740px)
 
 ## 사진 슬라이드
 
-`.slider` 안 `.slider__track` 에 `img.slider__slide` 를 넣으면 손가락으로 넘기기와 아래 점 표시가 자동으로 붙음. 사진은 가로 740px, 슬롯 비율에 맞춰 자른 JPG 로 넣음.
+`.slider` 안 `.slider__track` 에 `img.slider__slide` 를 넣으면 손가락으로 넘기기와 오른쪽 아래 장수 표시(「1 / 2」, 누르면 다음 사진)가 자동으로 붙음. 사진은 가로 740px, 슬롯 비율에 맞춰 자른 JPG 로 넣음.
 
 ## CTA 동작
 
