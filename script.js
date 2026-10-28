@@ -166,7 +166,9 @@
     for (i = 0; i < targets.length; i++) io.observe(targets[i]);
   })();
 
-  // ---------- 사진 슬라이드: 스와이프 + 장수 표시(누르면 다음 사진) ----------
+  // ---------- 사진 슬라이드: 스와이프 + 좌우 화살표 + 장수 표시 ----------
+  var ARROW_PATH = { prev: "M15 18l-6-6 6-6", next: "M9 18l6-6-6-6" };
+
   Array.prototype.forEach.call(document.querySelectorAll(".slider"), function (slider) {
     var track = slider.querySelector(".slider__track");
     var counter = slider.querySelector(".slider__count");
@@ -174,9 +176,17 @@
     if (count < 2) { counter.hidden = true; return; }
 
     var current = 0;
-    counter.setAttribute("aria-label", "다음 사진 보기");
-    counter.addEventListener("click", function () {
-      track.scrollTo({ left: ((current + 1) % count) * track.clientWidth, behavior: "smooth" });
+    function goTo(idx) {
+      track.scrollTo({ left: ((idx + count) % count) * track.clientWidth, behavior: "smooth" });
+    }
+    ["prev", "next"].forEach(function (dir) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "slider__arw slider__arw--" + dir;
+      btn.setAttribute("aria-label", dir === "prev" ? "이전 사진" : "다음 사진");
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + ARROW_PATH[dir] + '"/></svg>';
+      btn.addEventListener("click", function () { goTo(dir === "prev" ? current - 1 : current + 1); });
+      slider.appendChild(btn);
     });
 
     function sync() {

@@ -101,11 +101,22 @@ section { padding-left: 3rem; padding-right: 3rem; }
 }
 .slider__count {
   position: absolute; right: 1rem; bottom: 1rem;
-  padding: 0.3rem 0.7rem; border: 0; border-radius: 99px;
-  background: rgba(0, 0, 0, .45); color: #fff; cursor: pointer;
+  padding: 0.3rem 0.7rem; border-radius: 99px;
+  background: rgba(0, 0, 0, .45); color: #fff;
   font-size: 1rem; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums;
 }
 .slider__count[hidden] { display: none; }
+.slider__arw {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 3.2rem; height: 3.2rem; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(0, 0, 0, .4); color: #fff; cursor: pointer;
+  display: grid; place-items: center;
+  transition: background .15s ease;
+}
+.slider__arw:hover { background: rgba(0, 0, 0, .6); }
+.slider__arw svg { width: 1.6rem; height: 1.6rem; }
+.slider__arw--prev { left: 1rem; }
+.slider__arw--next { right: 1rem; }
 .slider--hero { --ratio: 740 / 690; }
 .slider--about { --ratio: 740 / 520; border-radius: 1.2rem; }
 .slider--survey { --ratio: 740 / 480; border-radius: 1.2rem; }
